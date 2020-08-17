@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './component/home';
+import CreateLocation from './component/create-location';
+import { SnackbarProvider } from 'notistack';
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<SnackbarProvider
+				anchorOrigin={{
+					vertical: 'top',
+					horizontal: 'right',
+				}}
+				maxSnack={1}
+				dense
+				autoHideDuration={2000}
+			>
+				<Router basename="/">
+					<Switch>
+						<Route path="/create-location" component={CreateLocation} />
+						<Route path="/" component={Home} />
+					</Switch>
+				</Router>
+			</SnackbarProvider>
+		</div>
+	);
 }
 
 export default App;
